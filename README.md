@@ -6,9 +6,7 @@ The address of the compiled expression is returned, which can be passed into pro
 Present as "dll" library and Delphi sources. Can be compiled in FPC (Lazarus). Can be direct connection to the program (without dll).
 Examples for Delphi, Lazarus , GCC (Codeblock).
 Foreval.dll is 32 bit compiler. Can be connected only for 32 bit program.
-Compiled "Foreval.dll" and  demo programs work in Windows OS 32/64.  
-Current version   9.1.1.395A.  
-MIT License.
+Compiled "Foreval.dll" and  demo programs work in Windows OS 32/64.   Current version   9.1.1.395A.   MIT License.
 
 
 ## Main properties:
