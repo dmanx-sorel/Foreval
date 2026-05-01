@@ -1,0 +1,135 @@
+object FuncPC: TFuncPC
+  Left = 300
+  Top = 300
+  BorderStyle = bsDialog
+  Caption = 'Define function'
+  ClientHeight = 482
+  ClientWidth = 929
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object MA: TMemo
+    Left = 8
+    Top = 8
+    Width = 905
+    Height = 428
+    Lines.Strings = (
+      'void() = x*ad[n]'
+      'gavr(dat: array)=root(prod(dat),len(dat))'
+      'fround(x)=if(|{x}|<0.5,[x],[x]+sign(x))'
+      ''
+      'func1(x1,x2: real): real=x1*sin(x2)'
+      'func1(z1,z2: complex): complex = z1*sin(z2)'
+      ''
+      
+        'func2(x1,x2,x3: real): real=y*func1(x1+x2,func1(sin(x1),x+x3)+x)' +
+        '+x3'
+      
+        'func2(z1,z2,z3: complex): complex = y*func1(z1+z2,func1(sin(z1),' +
+        'x+z3)+x)+z3'
+      ''
+      'func3(x1,x2: real): real=if(x1<x2,x1^2,if(x1=x2,x1^3,x1^4))'
+      
+        'func3(z1,z2: complex): complex=if(|z1|<|z2|,z1^2,if(|z1|=|z2|,z1' +
+        '^3,z1^4))'
+      ''
+      'func4(x1,x2: real): real = if(x1<>x2)*(x1+x2)'
+      'func4(z1,z2: complex): complex = if(|z1|<>|z2|)*(z1+z2)'
+      ''
+      
+        'func5(x1,x2: real; z1,z2: complex; ad1: array; n1: integer): com' +
+        'plex = func4(x1,x2)+func4(z1,z2)+ad1[n1]'
+      ''
+      
+        'sqrtz(x1: real): complex = if(x1 < 0, i*sqrt(|x1|)+0, sqrt(x1)+i' +
+        '*0)'
+      'sqrtz(z1: complex): complex = sqrt(z1)'
+      ''
+      
+        'funcd(z1,z2: complex): complex = funcd_r=|z1|; funcd_arg=arg(z1)' +
+        '; funcd_z1.re=funcd_r*cos(funcd_arg); funcd_z1.im=im(funcd_r*i*s' +
+        'in(funcd_arg)); funcd_z2=|z2|*exp(i*arg(z2)); if(z1.re>z2.re,fun' +
+        'cd_z1/funcd_z2,funcd_z2/funcd_z1)'
+      ''
+      
+        'dispn1(md: array double) =  s:dbl=0;  len_md:int=len(md);  avr_m' +
+        'd:dbl=avr(md);  n:int=0; ckl_n>> if(n>len_md-1,goto(end));   s=s' +
+        '+sqr(md[n]-avr_md); inc(n);  goto(ckl_n);  end>> sqrt(s/(len_md-' +
+        '1))'
+      
+        'fcos(x: ext)= arg_x:ext = x;  ifp((x>=0) and (x<=2*pi),goto(Lb1)' +
+        '); n:int = [x/(2*pi)]; arg_x=x-n*2*pi; Lb1>>s:ext=0; n=0; ckl_n>' +
+        '> ifp(n>20,goto(end)); s=s+(-1)^n*arg_x^(2*n)/(2*n)!; inc(n); go' +
+        'to(ckl_n); end>>s'
+      
+        'maxf(md: array double) =  s:dbl=md[0];  len_md:int=len(md);    n' +
+        ':int=1;  ckl_n>> if(n>len_md-1,goto(end));   s=if(md[n]>=s,md[n]' +
+        ',s); inc(n);  goto(ckl_n);  end>>s'
+      
+        'fibn(n: int)= s:dbl=0; x1:dbl=0; x2:dbl=1;j:int=2; ifp(n>2,goto(' +
+        'ckl)); s=iff(n=0,0,1); goto(end); ckl>> ifp(j>n,goto(end)); s=x1' +
+        '+x2; x1=x2; x2=s; inc(j); goto(ckl); end>> s;'
+      
+        'hermit(n: int;x: dbl)=s:dbl=1; ifp(n>1,goto(bgn)); s=iff(n=0,1,2' +
+        '*x); goto(end); bgn>> j:int=2;  x1:dbl=1; x2:dbl=2*x; ckl>> ifp(' +
+        'j>n,goto(end)); s=2*x*x2-2*(j-1)*x1; x1=x2; x2=s; inc(j); goto(c' +
+        'kl); end>> s;'
+      
+        'pcbesselJ(m:int; x: ext)= L:int=len(Aint); fn:int=[if(m=0,|x|/10' +
+        '+1,if(|x|<(1E-5),m/10+1,|x*m|/10+1))]; n:int=5*fn; a: ext=0; b: ' +
+        'ext=pi; h:ext=|b-a|/n; int1:ext=0; j:int=0; cklj>> if(j>n-1,goto' +
+        '(end));x1:ext=a+j*h;x2:ext=a+(j+1)*h;ax:ext=(x1+x2)*0.5;sx:ext=(' +
+        'x2-x1)*0.5; k:int=0; cklk>> if(k>L-1,goto(nxtj));t:ext=sx*Bint[k' +
+        ']+ax; int1=int1+Aint[k]*(cos(m*t-x*sin(t)))*sx; inc(k); goto(ckl' +
+        'k); nxtj>>inc(j);goto(cklj);end>>int1/pi'
+      
+        'nprime(_min,_max: int)=limit:ext=_max; res:int=0;  ifp((_min > _' +
+        'max) or (_max <=1), res=0; goto(end));   ifp(_max = 3,ifp(_min=3' +
+        ',res=1;goto(end),res=2;goto(end)),ifp(_max=2,res=1;goto(end))); ' +
+        ' is_prime:arrayInt=limit+2; jj: ext=0; i:int=0; k:ext=0; x: int=' +
+        '0; y:int=0; n:ext=0;  Lsqrt:ext=[sqrt(limit)]; for(i,5,limit,is_' +
+        'prime[i]=0); for(x,1,Lsqrt,for(y,1,Lsqrt,n=4*sqr(x)+sqr(y);ifp((' +
+        'n<=limit) and ((mod(n,12) = 1) or (mod(n,12) = 5)),is_prime[n]=1' +
+        '-is_prime[n]); n=n-sqr(x); ifp((n<=limit) and (mod(n,12) = 7) , ' +
+        'is_prime[n]=1-is_prime[n] ); n=n-2*sqr(y); ifp((x>y) and (n<=lim' +
+        'it) and (mod(n,12) = 11),is_prime[n]=1-is_prime[n])));  for(i,5,' +
+        'Lsqrt,ifp(is_prime[i]=1,k=sqr(i);n=k; while(n<=limit,is_prime[n]' +
+        '=0; n=n+k))); is_prime[0]=0;  is_prime[0]=0;  is_prime[1]=0; is_' +
+        'prime[2]=1; is_prime[3]=1; for(i,_min,_max,ifp(is_prime[i]=1,inc' +
+        '(res))); end>> res'
+      ''
+      'intf(x: ext)=x*sin(x)'
+      
+        'integral1(a,b: ext)=L:int=len(Aint);n:int=100;h:ext=|b-a|/n; int' +
+        '1:ext=0; j:int=0; cklj>> if(j>n-1,goto(end));x1:ext=a+j*h;x2:ext' +
+        '=a+(j+1)*h;ax:ext=(x1+x2)*0.5;sx:ext=(x2-x1)*0.5; k:int=0; cklk>' +
+        '> if(k>L-1,goto(nxtj));x:ext=sx*Bint[k]+ax; int1=int1+Aint[k]*in' +
+        'tf(x)*sx; inc(k); goto(cklk); nxtj>>inc(j);goto(cklj);end>>int1')
+    ScrollBars = ssBoth
+    TabOrder = 0
+  end
+  object BS: TButton
+    Left = 366
+    Top = 442
+    Width = 75
+    Height = 25
+    Caption = 'Compile'
+    TabOrder = 1
+    OnClick = BSClick
+  end
+  object BC: TButton
+    Left = 472
+    Top = 442
+    Width = 75
+    Height = 25
+    Caption = 'Close'
+    TabOrder = 2
+    OnClick = BCClick
+  end
+end

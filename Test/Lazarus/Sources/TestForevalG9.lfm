@@ -1,0 +1,2028 @@
+object Form1: TForm1
+  Left = 329
+  Height = 879
+  Top = 122
+  Width = 1474
+  Caption = 'Test  Foreval.dll (v.9.1.1.395)'
+  ClientHeight = 879
+  ClientWidth = 1474
+  Color = clBtnFace
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  ParentBiDiMode = False
+  LCLVersion = '2.0.10.0'
+  object LFR: TLabel
+    Left = 108
+    Height = 13
+    Top = 278
+    Width = 123
+    Caption = '                                         '
+    ParentColor = False
+  end
+  object Label2: TLabel
+    Left = 13
+    Height = 13
+    Top = 278
+    Width = 33
+    Caption = 'Result:'
+    ParentColor = False
+  end
+  object Label5: TLabel
+    Left = 12
+    Height = 13
+    Top = 308
+    Width = 60
+    Caption = 'Perfomance:'
+    ParentColor = False
+  end
+  object LIPF: TLabel
+    Left = 108
+    Height = 13
+    Top = 316
+    Width = 126
+    Caption = '                                          '
+    ParentColor = False
+  end
+  object LCTF: TLabel
+    Left = 108
+    Height = 13
+    Top = 356
+    Width = 129
+    Caption = '                                           '
+    ParentColor = False
+  end
+  object LCT: TLabel
+    Left = 13
+    Height = 13
+    Top = 356
+    Width = 79
+    Caption = 'Compilation time:'
+    ParentColor = False
+  end
+  object LP: TLabel
+    Left = 12
+    Height = 13
+    Top = 326
+    Width = 51
+    Caption = '(Expr./ms.)'
+    ParentColor = False
+  end
+  object LCT1: TLabel
+    Left = 13
+    Height = 13
+    Top = 374
+    Width = 22
+    Caption = '(ms.)'
+    ParentColor = False
+  end
+  object Label14: TLabel
+    Left = 248
+    Height = 13
+    Top = 449
+    Width = 8
+    Caption = 'x:'
+    ParentColor = False
+  end
+  object Label16: TLabel
+    Left = 249
+    Height = 13
+    Top = 476
+    Width = 8
+    Caption = 'y:'
+    ParentColor = False
+  end
+  object Label17: TLabel
+    Left = 249
+    Height = 13
+    Top = 499
+    Width = 6
+    Caption = 't:'
+    ParentColor = False
+  end
+  object Label18: TLabel
+    Left = 361
+    Height = 13
+    Top = 449
+    Width = 9
+    Caption = 'n:'
+    ParentColor = False
+  end
+  object Label19: TLabel
+    Left = 360
+    Height = 13
+    Top = 493
+    Width = 5
+    Caption = 'j:'
+    ParentColor = False
+  end
+  object Label20: TLabel
+    Left = 361
+    Height = 13
+    Top = 473
+    Width = 9
+    Caption = 'k:'
+    ParentColor = False
+  end
+  object Label21: TLabel
+    Left = 12
+    Height = 13
+    Top = 164
+    Width = 35
+    Caption = 'counts:'
+    ParentColor = False
+  end
+  object Label27: TLabel
+    Left = 280
+    Height = 13
+    Top = 424
+    Width = 40
+    Caption = 'Real var'
+    ParentColor = False
+  end
+  object Label28: TLabel
+    Left = 379
+    Height = 13
+    Top = 423
+    Width = 42
+    Caption = 'Integ var'
+    ParentColor = False
+  end
+  object Label1: TLabel
+    Left = 512
+    Height = 13
+    Top = 423
+    Width = 24
+    Caption = 'Array'
+    ParentColor = False
+  end
+  object Label29: TLabel
+    Left = 464
+    Height = 13
+    Top = 447
+    Width = 24
+    Caption = 'ad[0]'
+    ParentColor = False
+  end
+  object Label30: TLabel
+    Left = 464
+    Height = 13
+    Top = 469
+    Width = 24
+    Caption = 'ad[1]'
+    ParentColor = False
+  end
+  object Label31: TLabel
+    Left = 464
+    Height = 13
+    Top = 491
+    Width = 24
+    Caption = 'ad[2]'
+    ParentColor = False
+  end
+  object LDPT: TLabel
+    Left = 530
+    Height = 13
+    Top = 322
+    Width = 132
+    Caption = '                                            '
+    ParentColor = False
+  end
+  object LDCT: TLabel
+    Left = 532
+    Height = 13
+    Top = 356
+    Width = 132
+    Caption = '                                            '
+    ParentColor = False
+  end
+  object Label33: TLabel
+    Left = 982
+    Height = 13
+    Top = 455
+    Width = 57
+    Caption = 'String Type:'
+    ParentColor = False
+  end
+  object LST: TLabel
+    Left = 1053
+    Height = 13
+    Top = 455
+    Width = 111
+    Caption = '                                     '
+    ParentColor = False
+  end
+  object B_Calc: TButton
+    Left = 128
+    Height = 27
+    Top = 232
+    Width = 80
+    Caption = 'calc'
+    OnClick = B_CalcClick
+    TabOrder = 1
+  end
+  object EF: TEdit
+    Left = 9
+    Height = 21
+    Top = 400
+    Width = 1160
+    TabOrder = 0
+    Text = ' (sin(x/cos(x/y))^3-cos(x*sin(x/y))^3)*(cos(x/cos(x/y))^3-sin(x*sin(x/y))^3)*exp(x/exp(x/z1))*polynom(ad,x/z1)/(sh(x/z1)+ch(x/exp(x/z1)+th(x/exp(x/z1))))*((sin(a/b)^2+cos(b/a)^2)^(x/y))/((sin(ai/bi)-cos(bi/ai))^(x/z1))+log(sin(ai),x)*log(z1,cos(bi))'
+  end
+  object CB_OM: TCheckBox
+    Left = 170
+    Height = 19
+    Top = 162
+    Width = 67
+    Caption = 'One/Multi'
+    TabOrder = 2
+  end
+  object GB_Opt: TGroupBox
+    Left = 1
+    Height = 150
+    Top = 0
+    Width = 632
+    Caption = 'Optimization'
+    ClientHeight = 132
+    ClientWidth = 628
+    TabOrder = 3
+    object Label7: TLabel
+      Left = 155
+      Height = 13
+      Top = 0
+      Width = 75
+      Caption = 'FPUStackDeep'
+      ParentColor = False
+    end
+    object CB_CalcConstMulDiv: TCheckBox
+      Left = 8
+      Height = 19
+      Top = 35
+      Width = 101
+      Caption = 'CalcConstMulDiv'
+      Checked = True
+      OnClick = CB_CalcConstMulDivClick
+      State = cbChecked
+      TabOrder = 0
+    end
+    object UDSD: TUpDown
+      Left = 272
+      Height = 21
+      Top = -2
+      Width = 17
+      Max = 8
+      Min = 0
+      OnClick = UDSDClick
+      Position = 8
+      TabOrder = 1
+    end
+    object Panel1: TPanel
+      Left = 236
+      Height = 21
+      Top = -2
+      Width = 27
+      BevelOuter = bvLowered
+      Caption = '8'
+      TabOrder = 2
+    end
+    object CB_Op: TCheckBox
+      Left = 8
+      Height = 19
+      Top = 2
+      Width = 91
+      Caption = 'All Optimization'
+      Checked = True
+      OnClick = CB_OpClick
+      State = cbChecked
+      TabOrder = 3
+    end
+    object GB_Repl: TGroupBox
+      Left = 296
+      Height = 104
+      Top = -8
+      Width = 328
+      Caption = 'Replace'
+      ClientHeight = 86
+      ClientWidth = 324
+      TabOrder = 4
+      object GB_Opr: TGroupBox
+        Left = 168
+        Height = 40
+        Top = -8
+        Width = 152
+        Caption = 'Operations'
+        ClientHeight = 22
+        ClientWidth = 148
+        TabOrder = 0
+        object CB_DIV: TCheckBox
+          Left = 0
+          Height = 19
+          Top = 1
+          Width = 36
+          Caption = 'Div'
+          Checked = True
+          OnClick = CB_DIVClick
+          State = cbChecked
+          TabOrder = 0
+        end
+        object CB_MUL: TCheckBox
+          Left = 40
+          Height = 19
+          Top = 1
+          Width = 37
+          Caption = 'Mul'
+          Checked = True
+          OnClick = CB_MULClick
+          State = cbChecked
+          TabOrder = 1
+        end
+        object CB_RAS: TCheckBox
+          Left = 80
+          Height = 19
+          Top = 1
+          Width = 63
+          Caption = 'Add/Sub'
+          Checked = True
+          OnClick = CB_RASClick
+          State = cbChecked
+          TabOrder = 2
+        end
+      end
+      object CB_RF: TCheckBox
+        Left = 3
+        Height = 19
+        Top = 0
+        Width = 66
+        Caption = 'Functions'
+        Checked = True
+        OnClick = CB_RFClick
+        State = cbChecked
+        TabOrder = 1
+      end
+      object CB_RFCS: TCheckBox
+        Left = 3
+        Height = 19
+        Top = 16
+        Width = 120
+        Caption = 'Composite (Trig/Hyp)'
+        Checked = True
+        OnClick = CB_RFCSClick
+        State = cbChecked
+        TabOrder = 2
+      end
+      object CB_DCR: TCheckBox
+        Left = 3
+        Height = 19
+        Top = 32
+        Width = 137
+        Caption = 'Disable in composite real'
+        OnClick = CB_DCRClick
+        TabOrder = 3
+      end
+      object CB_DCZ: TCheckBox
+        Left = 3
+        Height = 19
+        Top = 48
+        Width = 159
+        Caption = 'Disable in composite complex'
+        OnClick = CB_DCZClick
+        TabOrder = 4
+      end
+      object CB_RV: TCheckBox
+        Left = 82
+        Height = 19
+        Top = 0
+        Width = 49
+        Caption = 'Arrays'
+        Checked = True
+        OnClick = CB_RVClick
+        State = cbChecked
+        TabOrder = 5
+      end
+    end
+    object CB_RME: TCheckBox
+      Left = 480
+      Height = 19
+      Top = 40
+      Width = 118
+      Caption = 'Replace in multi expr'
+      Checked = True
+      OnClick = CB_RMEClick
+      State = cbChecked
+      TabOrder = 5
+    end
+    object CB_DRL: TCheckBox
+      Left = 480
+      Height = 19
+      Top = 58
+      Width = 136
+      Caption = 'Disable replace at loop,if'
+      OnChange = CB_DRLClick
+      OnClick = CB_DRLClick
+      TabOrder = 6
+    end
+    object CB_CalcConstInTree: TCheckBox
+      Left = 8
+      Height = 19
+      Top = 52
+      Width = 122
+      Caption = 'CalcConstIn(On Tree)'
+      Checked = True
+      OnClick = CB_CalcConstInTreeClick
+      State = cbChecked
+      TabOrder = 7
+    end
+    object CB_MULDIV: TCheckBox
+      Left = 8
+      Height = 19
+      Top = 18
+      Width = 58
+      Caption = 'Mul/Div'
+      Checked = True
+      OnClick = CB_MULDIVClick
+      State = cbChecked
+      TabOrder = 8
+    end
+    object cb_SKIF: TCheckBox
+      Left = 145
+      Height = 19
+      Top = 20
+      Width = 71
+      Caption = 'Skipped IF'
+      Checked = True
+      OnClick = cb_SKIFClick
+      State = cbChecked
+      TabOrder = 9
+    end
+    object CB_CalcConstFunc: TCheckBox
+      Left = 8
+      Height = 19
+      Top = 70
+      Width = 137
+      Caption = 'CalcConstFunc(On Tree)'
+      Checked = True
+      OnClick = CB_CalcConstFuncClick
+      State = cbChecked
+      TabOrder = 10
+    end
+    object CB_CalcConstWholeExpr: TCheckBox
+      Left = 8
+      Height = 19
+      Top = 105
+      Width = 120
+      Caption = 'CalcConstWholeExpr'
+      Checked = True
+      OnClick = CB_CalcConstWholeExprClick
+      State = cbChecked
+      TabOrder = 11
+    end
+    object CB_IntArg: TCheckBox
+      Left = 223
+      Height = 19
+      Top = 20
+      Width = 66
+      Caption = 'Integ Arg.'
+      Checked = True
+      OnClick = CB_IntArgClick
+      State = cbChecked
+      TabOrder = 12
+    end
+    object CB_DCEM: TCheckBox
+      Left = 408
+      Height = 19
+      Top = 96
+      Width = 196
+      Caption = 'Disable calc const whole expr in multi'
+      OnClick = CB_DCEMClick
+      TabOrder = 13
+    end
+    object CB_AccFunc: TCheckBox
+      Left = 296
+      Height = 19
+      Top = 96
+      Width = 112
+      Caption = 'Accurate Functions'
+      OnClick = CB_AccFuncClick
+      TabOrder = 14
+    end
+    object CB_DelZeroBranch: TCheckBox
+      Left = 9
+      Height = 19
+      Top = 88
+      Width = 132
+      Caption = 'DelZeroBranch(onTree)'
+      Checked = True
+      OnClick = CB_DelZeroBranchClick
+      State = cbChecked
+      TabOrder = 15
+    end
+    object CB_RedArg: TCheckBox
+      Left = 145
+      Height = 19
+      Top = 40
+      Width = 122
+      Caption = 'ConstArgReduce2to1'
+      Checked = True
+      OnClick = CB_RedArgClick
+      State = cbChecked
+      TabOrder = 16
+    end
+    object CB_PCInline: TCheckBox
+      Left = 528
+      Height = 19
+      Top = 112
+      Width = 95
+      Caption = 'Enable InlinePC'
+      OnClick = CB_PCInlineClick
+      TabOrder = 17
+    end
+    object CB_Actg_Type: TCheckBox
+      Left = 320
+      Height = 19
+      Top = 112
+      Width = 85
+      Caption = 'ArcCtg_1/Arg'
+      OnClick = CB_Actg_TypeClick
+      TabOrder = 18
+    end
+  end
+  object E_Cnt: TEdit
+    Left = 56
+    Height = 21
+    Top = 160
+    Width = 108
+    TabOrder = 4
+    Text = '10000000'
+  end
+  object EX: TEdit
+    Left = 267
+    Height = 21
+    Top = 447
+    Width = 75
+    OnChange = EXChange
+    TabOrder = 5
+    Text = '2.123'
+  end
+  object EY: TEdit
+    Left = 267
+    Height = 21
+    Top = 469
+    Width = 75
+    OnChange = EYChange
+    TabOrder = 6
+    Text = '5.456'
+  end
+  object ET: TEdit
+    Left = 267
+    Height = 21
+    Top = 491
+    Width = 75
+    OnChange = ETChange
+    TabOrder = 7
+    Text = '-3.789'
+  end
+  object EN: TEdit
+    Left = 377
+    Height = 21
+    Top = 446
+    Width = 75
+    OnChange = ENChange
+    TabOrder = 8
+    Text = '1'
+  end
+  object EJ: TEdit
+    Left = 376
+    Height = 21
+    Top = 491
+    Width = 75
+    OnChange = EJChange
+    TabOrder = 9
+    Text = '5'
+  end
+  object EK: TEdit
+    Left = 377
+    Height = 21
+    Top = 468
+    Width = 75
+    OnChange = EKChange
+    TabOrder = 10
+    Text = '2'
+  end
+  object EA0: TEdit
+    Left = 497
+    Height = 21
+    Top = 444
+    Width = 75
+    OnChange = EA0Change
+    TabOrder = 11
+    Text = '3.5'
+  end
+  object EA1: TEdit
+    Left = 497
+    Height = 21
+    Top = 466
+    Width = 75
+    OnChange = EA1Change
+    TabOrder = 12
+    Text = '-1.4'
+  end
+  object EA2: TEdit
+    Left = 497
+    Height = 21
+    Top = 488
+    Width = 75
+    OnChange = EA2Change
+    TabOrder = 13
+    Text = '7.6'
+  end
+  object B_DefFunc: TButton
+    Left = 856
+    Height = 26
+    Top = 471
+    Width = 75
+    Caption = 'Define  Func'
+    OnClick = B_DefFuncClick
+    TabOrder = 14
+  end
+  object B_CaclDiff: TButton
+    Left = 524
+    Height = 27
+    Top = 239
+    Width = 80
+    Caption = 'calc diff'
+    OnClick = B_CaclDiffClick
+    TabOrder = 15
+  end
+  object CB_ND: TCheckBox
+    Left = 622
+    Height = 19
+    Top = 247
+    Width = 84
+    Caption = 'Numerical diff'
+    TabOrder = 16
+  end
+  object MT: TMemo
+    Left = 12
+    Height = 305
+    Top = 536
+    Width = 1153
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Lines.Strings = (
+      '  '
+      '// Поиск простых чисел на отрезке  [_min,_max]: res - их число; Ys- значения //     '
+      '// Prime numbers in [_min,_max]: res - numbers; Ys- values //'
+      ''
+      ''
+      '_min: ext=100; _max: ext=500; '
+      'limit: ext=_max; res: int=0; Ys: arrayExt = 0;'
+      ''
+      'ifp((_min > _max) or (_max <=1), res=0; goto(end)); '
+      '  '
+      'ifp(_max = 3, '
+      '   ifp(_min=3,  SetLen(Ys,1); Ys[0]=3;  res=1; goto(end), SetLen(Ys,2); Ys[0]=2; Ys[1]=3; res=2; goto(end)), '
+      '       ifp(_max=2,  SetLen(Ys,1); Ys[0]=2; res=1; goto(end)'
+      '   )'
+      '); '
+      ''
+      'is_prime: arrayInt=limit+2; jj: ext=0; i:int=0; k:ext=0; x: int=0; y:int=0; n:ext=0;  Lsqrt: ext=[sqrt(limit)]; '
+      ''
+      'for(i = 5,limit,is_prime[i]=0);'
+      ' '
+      'for(x = 1, Lsqrt,'
+      '  for(y = 1, Lsqrt,'
+      '    n=4*sqr(x)+sqr(y);'
+      '    ifp((n<=limit) and ((mod(n,12) = 1) or (mod(n,12) = 5)), is_prime[n]=1-is_prime[n]); '
+      '    n=n-sqr(x); '
+      '    ifp((n<=limit) and (mod(n,12) = 7) ,  is_prime[n]=1-is_prime[n] ); '
+      '    n=n-2*sqr(y); '
+      '    ifp((x>y) and (n<=limit) and (mod(n,12) = 11), is_prime[n]=1-is_prime[n]); '
+      '  );'
+      ');'
+      ''
+      'for(i = 5,Lsqrt,'
+      '   ifp(is_prime[i]=1, k=sqr(i); n=k; while(n<=limit, is_prime[n]=0; n=n+k))'
+      '); '
+      ''
+      'is_prime[0]=0;  is_prime[0]=0;  is_prime[1]=0; is_prime[2]=1; is_prime[3]=1;'
+      ''
+      'for(i = _min, _max,  ifp(is_prime[i]=1, inc(res)));'
+      'SetLen(Ys, res);  cn: int=0;'
+      'for(i = _min, _max, ifp(is_prime[i]=1,Ys[cn]=i; inc(cn)));'
+      ''
+      ' end>>'
+      ''
+      '  PrintW2(res);  '
+      '  SpaceW2(1);  AsteriskW2();'
+      '  PrintW2(Ys);'
+      '  SpaceW2(1); AsteriskW2();            '
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+    )
+    ParentFont = False
+    ScrollBars = ssBoth
+    TabOrder = 17
+  end
+  object B_RunProg: TButton
+    Left = 96
+    Height = 25
+    Top = 847
+    Width = 104
+    Caption = 'RunProg'
+    OnClick = B_RunProgClick
+    TabOrder = 18
+  end
+  object B_CompFunc: TButton
+    Left = 744
+    Height = 25
+    Top = 848
+    Width = 75
+    Caption = 'ComplFunc'
+    OnClick = B_CompFuncClick
+    TabOrder = 19
+  end
+  object GB_NumDiff: TGroupBox
+    Left = 248
+    Height = 64
+    Top = 154
+    Width = 256
+    Caption = 'Numeric differentiation'
+    ClientHeight = 46
+    ClientWidth = 252
+    TabOrder = 20
+    object Label4: TLabel
+      Left = 5
+      Height = 13
+      Top = 6
+      Width = 202
+      Caption = 'degree of polynomial of interpolation (3-20):'
+      ParentColor = False
+    end
+    object Label6: TLabel
+      Left = 8
+      Height = 13
+      Top = 24
+      Width = 184
+      Caption = 'degree of power  (h=0.1^Ph; Ph=1-18):'
+      ParentColor = False
+    end
+    object E_NP: TEdit
+      Left = 216
+      Height = 21
+      Top = 0
+      Width = 32
+      TabOrder = 0
+      Text = '14'
+    end
+    object E_PH: TEdit
+      Left = 216
+      Height = 21
+      Top = 24
+      Width = 32
+      TabOrder = 1
+      Text = '2'
+    end
+  end
+  object B_RDO: TButton
+    Left = 648
+    Height = 25
+    Top = 144
+    Width = 85
+    Caption = 'rand diff order'
+    OnClick = B_RDOClick
+    TabOrder = 21
+  end
+  object LDR: TLabel
+    Left = 524
+    Height = 13
+    Top = 281
+    Width = 138
+    Caption = '                                              '
+    ParentColor = False
+  end
+  object L_DO: TLabel
+    Left = 735
+    Height = 13
+    Top = 154
+    Width = 60
+    Caption = 'dx, dy, dt, ds'
+    ParentColor = False
+  end
+  object E_DX: TEdit
+    Left = 652
+    Height = 21
+    Top = 112
+    Width = 32
+    TabOrder = 22
+    Text = '1'
+  end
+  object E_DY: TEdit
+    Left = 684
+    Height = 21
+    Top = 112
+    Width = 32
+    TabOrder = 23
+    Text = '0'
+  end
+  object E_DT: TEdit
+    Left = 716
+    Height = 21
+    Top = 112
+    Width = 32
+    TabOrder = 24
+    Text = '0'
+  end
+  object E_DS: TEdit
+    Left = 748
+    Height = 21
+    Top = 112
+    Width = 31
+    TabOrder = 25
+    Text = '0'
+  end
+  object Label_dx: TLabel
+    Left = 660
+    Height = 13
+    Top = 96
+    Width = 11
+    Caption = 'dx'
+    ParentColor = False
+  end
+  object Label_dy: TLabel
+    Left = 692
+    Height = 13
+    Top = 96
+    Width = 11
+    Caption = 'dy'
+    ParentColor = False
+  end
+  object Label_dt: TLabel
+    Left = 723
+    Height = 13
+    Top = 96
+    Width = 9
+    Caption = 'dt'
+    ParentColor = False
+  end
+  object Label_dz: TLabel
+    Left = 753
+    Height = 13
+    Top = 96
+    Width = 11
+    Caption = 'ds'
+    ParentColor = False
+  end
+  object Label_dxn: TLabel
+    Left = 671
+    Height = 13
+    Top = 88
+    Width = 6
+    Caption = 'n'
+    ParentColor = False
+  end
+  object Label_dyn: TLabel
+    Left = 704
+    Height = 13
+    Top = 88
+    Width = 6
+    Caption = 'n'
+    ParentColor = False
+  end
+  object Label_dtn: TLabel
+    Left = 732
+    Height = 13
+    Top = 88
+    Width = 6
+    Caption = 'n'
+    ParentColor = False
+  end
+  object Label_dzn: TLabel
+    Left = 765
+    Height = 13
+    Top = 88
+    Width = 6
+    Caption = 'n'
+    ParentColor = False
+  end
+  object B_ShowDiffStr: TButton
+    Left = 856
+    Height = 25
+    Top = 503
+    Width = 75
+    Caption = 'ShowDiffStr'
+    OnClick = B_ShowDiffStrClick
+    TabOrder = 26
+  end
+  object Label41: TLabel
+    Left = 360
+    Height = 13
+    Top = 856
+    Width = 63
+    Caption = 'Perf. time(ms)'
+    ParentColor = False
+  end
+  object LPFT: TLabel
+    Left = 440
+    Height = 13
+    Top = 856
+    Width = 108
+    Caption = '                                    '
+    ParentColor = False
+  end
+  object LDFT: TLabel
+    Left = 1050
+    Height = 13
+    Top = 511
+    Width = 111
+    Caption = '                                     '
+    ParentColor = False
+  end
+  object Label42: TLabel
+    Left = 971
+    Height = 13
+    Top = 511
+    Width = 63
+    Caption = 'Diff. time (ms)'
+    ParentColor = False
+  end
+  object Label43: TLabel
+    Left = 512
+    Height = 13
+    Top = 200
+    Width = 213
+    Caption = '<- (1-2) smooth function, (>=3) fast  oscillating'
+    ParentColor = False
+  end
+  object bTest: TButton
+    Left = 824
+    Height = 25
+    Top = 848
+    Width = 75
+    Caption = 'TestMulti'
+    OnClick = bTestClick
+    TabOrder = 27
+  end
+  object ETest: TEdit
+    Left = 904
+    Height = 21
+    Top = 852
+    Width = 56
+    OnChange = ETestChange
+    TabOrder = 28
+    Text = '100'
+  end
+  object GB_PrecCl: TGroupBox
+    Left = 952
+    Height = 80
+    Top = 0
+    Width = 80
+    Caption = 'Precision calc.'
+    ClientHeight = 62
+    ClientWidth = 76
+    TabOrder = 29
+    object RB_PD: TRadioButton
+      Left = 8
+      Height = 19
+      Top = 2
+      Width = 54
+      Caption = 'Double'
+      OnClick = RB_PDClick
+      TabOrder = 0
+    end
+    object RB_PE: TRadioButton
+      Left = 8
+      Height = 19
+      Top = 24
+      Width = 65
+      Caption = 'Extended'
+      Checked = True
+      OnClick = RB_PEClick
+      TabOrder = 1
+      TabStop = True
+    end
+  end
+  object IntTest: TButton
+    Left = 558
+    Height = 25
+    Top = 848
+    Width = 106
+    Caption = 'AutoTest'
+    OnClick = IntTestClick
+    TabOrder = 30
+  end
+  object MT1: TMemo
+    Left = 845
+    Height = 249
+    Top = 120
+    Width = 321
+    Lines.Strings = (
+      'On default:'
+      '                    variables: '
+      ' x, y, t, s, r, p, q, u, v   -  real extended;'
+      ' z1, z2, z3, z4, z5         -  complex extended;'
+      ' n, k, j, m, l                   -   integer;'
+      ''
+      '                    parameters:'
+      ' a, b, c, d, e      - real;'
+      ' ai, bi, ci, di, ei - complex;'
+      ''
+      '                          arrays:'
+      ' ad                                   - double    (Length=3)'
+      ' vd, vd1, vd2, vd3, xvd - double     (Length=100)'
+      ' ve, ve1, ve2, ve3, xve - extended (Length=100)'
+      ' vi,   vi1,  vi2,  vi3,   xvi  - integer    (Length=100)'
+      ''
+      'PS'
+      'Added external functions: see text '
+      'TestForevalG9.pas'
+      ' ''Float Var Type'' mode applies only for'
+      ' (x,y,t)&(z1,z2,z3) variables.'
+      ' Other remain "extended".'
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+    )
+    TabOrder = 31
+  end
+  object GB_FVT: TGroupBox
+    Left = 792
+    Height = 80
+    Top = 0
+    Width = 78
+    Caption = 'Float Var Type'
+    ClientHeight = 62
+    ClientWidth = 74
+    TabOrder = 32
+    object RB_FVD: TRadioButton
+      Left = 4
+      Height = 19
+      Top = 22
+      Width = 54
+      Caption = 'Double'
+      OnClick = RB_FVDClick
+      TabOrder = 0
+    end
+    object RB_FVE: TRadioButton
+      Left = 4
+      Height = 19
+      Top = 40
+      Width = 65
+      Caption = 'Extended'
+      Checked = True
+      OnClick = RB_FVEClick
+      TabOrder = 1
+      TabStop = True
+    end
+    object RB_FVS: TRadioButton
+      Left = 4
+      Height = 19
+      Top = 2
+      Width = 49
+      Caption = 'Single'
+      TabOrder = 2
+    end
+  end
+  object GB_XchBr: TGroupBox
+    Left = 632
+    Height = 80
+    Top = 0
+    Width = 77
+    Caption = 'Xch Branch'
+    ClientHeight = 62
+    ClientWidth = 73
+    TabOrder = 33
+    object RB_XbEnable: TRadioButton
+      Left = 5
+      Height = 19
+      Top = 20
+      Width = 53
+      Caption = 'Enable'
+      OnClick = RB_XbEnableClick
+      TabOrder = 0
+    end
+    object RB_XBdisable: TRadioButton
+      Left = 5
+      Height = 19
+      Top = 40
+      Width = 55
+      Caption = 'Disable'
+      OnClick = RB_XBdisableClick
+      TabOrder = 1
+    end
+    object RB_XbAuto: TRadioButton
+      Left = 5
+      Height = 19
+      Top = 0
+      Width = 42
+      Caption = 'Auto'
+      Checked = True
+      OnClick = RB_XbAutoClick
+      TabOrder = 2
+      TabStop = True
+    end
+  end
+  object GroupBox5: TGroupBox
+    Left = 872
+    Height = 80
+    Top = 0
+    Width = 77
+    Caption = 'Stack Type'
+    ClientHeight = 62
+    ClientWidth = 73
+    TabOrder = 34
+    object RB_SD: TRadioButton
+      Left = 8
+      Height = 19
+      Top = 8
+      Width = 54
+      Caption = 'Double'
+      OnClick = RB_SDClick
+      TabOrder = 0
+    end
+    object RB_SE: TRadioButton
+      Left = 8
+      Height = 19
+      Top = 32
+      Width = 65
+      Caption = 'Extended'
+      Checked = True
+      OnClick = RB_SEClick
+      TabOrder = 1
+      TabStop = True
+    end
+  end
+  object Label3: TLabel
+    Left = 112
+    Height = 13
+    Top = 425
+    Width = 58
+    Caption = 'Complex var'
+    ParentColor = False
+  end
+  object Ez1x: TEdit
+    Left = 40
+    Height = 21
+    Top = 447
+    Width = 75
+    TabOrder = 35
+    Text = '2.123'
+  end
+  object Label8: TLabel
+    Left = 8
+    Height = 13
+    Top = 449
+    Width = 23
+    Caption = 'z1.re'
+    ParentColor = False
+  end
+  object Label15: TLabel
+    Left = 9
+    Height = 13
+    Top = 473
+    Width = 23
+    Caption = 'z2.re'
+    ParentColor = False
+  end
+  object Label22: TLabel
+    Left = 8
+    Height = 13
+    Top = 499
+    Width = 23
+    Caption = 'z3.re'
+    ParentColor = False
+  end
+  object Ez2x: TEdit
+    Left = 40
+    Height = 21
+    Top = 469
+    Width = 75
+    TabOrder = 36
+    Text = '5.456'
+  end
+  object Ez3x: TEdit
+    Left = 40
+    Height = 21
+    Top = 491
+    Width = 75
+    TabOrder = 37
+    Text = '-3.789'
+  end
+  object Label23: TLabel
+    Left = 128
+    Height = 13
+    Top = 450
+    Width = 24
+    Caption = 'z1.im'
+    ParentColor = False
+  end
+  object Label24: TLabel
+    Left = 128
+    Height = 13
+    Top = 473
+    Width = 24
+    Caption = 'z2.im'
+    ParentColor = False
+  end
+  object Label25: TLabel
+    Left = 128
+    Height = 13
+    Top = 496
+    Width = 24
+    Caption = 'z3.im'
+    ParentColor = False
+  end
+  object Ez1y: TEdit
+    Left = 162
+    Height = 21
+    Top = 447
+    Width = 75
+    TabOrder = 38
+    Text = '-1.456'
+  end
+  object Ez2y: TEdit
+    Left = 162
+    Height = 21
+    Top = 469
+    Width = 75
+    TabOrder = 39
+    Text = '2.789'
+  end
+  object Ez3y: TEdit
+    Left = 162
+    Height = 21
+    Top = 492
+    Width = 75
+    TabOrder = 40
+    Text = '-3.123'
+  end
+  object GB_DinLd: TGroupBox
+    Left = 712
+    Height = 80
+    Top = 0
+    Width = 76
+    Caption = 'DinamicLoad'
+    ClientHeight = 62
+    ClientWidth = 72
+    TabOrder = 41
+    object RB_DLEnable: TRadioButton
+      Left = 12
+      Height = 19
+      Top = 8
+      Width = 53
+      Caption = 'Enable'
+      Checked = True
+      OnClick = RB_DLEnableClick
+      TabOrder = 1
+      TabStop = True
+    end
+    object RB_DLDisable: TRadioButton
+      Left = 12
+      Height = 19
+      Top = 32
+      Width = 55
+      Caption = 'Disable'
+      OnClick = RB_DLDisableClick
+      TabOrder = 0
+    end
+  end
+  object GB_RT: TGroupBox
+    Left = 280
+    Height = 42
+    Top = 224
+    Width = 185
+    Caption = 'Result Lead To Type'
+    ClientHeight = 24
+    ClientWidth = 181
+    TabOrder = 42
+    object RB_AsIs: TRadioButton
+      Left = 8
+      Height = 19
+      Top = 0
+      Width = 40
+      Caption = 'AsIs'
+      Checked = True
+      OnClick = RB_AsIsClick
+      TabOrder = 2
+      TabStop = True
+    end
+    object RB_Re: TRadioButton
+      Left = 64
+      Height = 19
+      Top = 0
+      Width = 42
+      Caption = 'Real'
+      OnClick = RB_ReClick
+      TabOrder = 0
+    end
+    object RB_Cx: TRadioButton
+      Left = 112
+      Height = 19
+      Top = 0
+      Width = 60
+      Caption = 'Complex'
+      OnClick = RB_CxClick
+      TabOrder = 1
+    end
+  end
+  object CB_VCx: TCheckBox
+    Left = 808
+    Height = 19
+    Top = 423
+    Width = 87
+    Caption = 'x,y,t - complex'
+    OnClick = CB_VCxClick
+    TabOrder = 43
+  end
+  object Label26: TLabel
+    Left = 974
+    Height = 13
+    Top = 479
+    Width = 67
+    Caption = 'ArgFuncType:'
+    ParentColor = False
+  end
+  object L_AFT: TLabel
+    Left = 1053
+    Height = 13
+    Top = 479
+    Width = 108
+    Caption = '                                    '
+    ParentColor = False
+  end
+  object CB_DFvars: TCheckBox
+    Left = 912
+    Height = 19
+    Top = 424
+    Width = 139
+    Caption = 'diff(x,y,t) <-> diff(z1,z2,z3)'
+    OnClick = CB_DFvarsClick
+    TabOrder = 44
+  end
+  object B_Refresh: TButton
+    Left = 856
+    Height = 25
+    Top = 443
+    Width = 75
+    Caption = 'Refresh'
+    OnClick = B_RefreshClick
+    TabOrder = 45
+  end
+  object CB_CXAnyAddr: TCheckBox
+    Left = 1061
+    Height = 19
+    Top = 423
+    Width = 103
+    Caption = 'z1,z2,z3-any addr'
+    OnClick = CB_CXAnyAddrClick
+    TabOrder = 46
+  end
+  object GB_CXDIV: TGroupBox
+    Left = 153
+    Height = 52
+    Top = 88
+    Width = 142
+    Caption = 'complex divizion'
+    ClientHeight = 34
+    ClientWidth = 138
+    TabOrder = 47
+    object RB_ZDiv_Fast: TRadioButton
+      Left = 5
+      Height = 19
+      Top = 0
+      Width = 37
+      Caption = 'fast'
+      Checked = True
+      OnClick = RB_ZDiv_FastClick
+      TabOrder = 3
+      TabStop = True
+    end
+    object RB_ZDiv_STD: TRadioButton
+      Left = 5
+      Height = 19
+      Top = 16
+      Width = 61
+      Caption = 'standard'
+      OnClick = RB_ZDiv_STDClick
+      TabOrder = 0
+    end
+    object RB_ZDiv_ACC: TRadioButton
+      Left = 72
+      Height = 19
+      Top = 0
+      Width = 62
+      Caption = 'accurate'
+      OnClick = RB_ZDiv_ACCClick
+      TabOrder = 1
+    end
+    object RB_ZDiv_Extra: TRadioButton
+      Left = 72
+      Height = 19
+      Top = 16
+      Width = 43
+      Caption = 'extra'
+      OnClick = RB_ZDiv_ExtraClick
+      TabOrder = 2
+    end
+  end
+  object bClearMT: TButton
+    Left = 8
+    Height = 25
+    Top = 848
+    Width = 75
+    Caption = 'ClearList'
+    OnClick = bClearMTClick
+    TabOrder = 48
+  end
+  object CB_TestExpr: TCheckBox
+    Left = 664
+    Height = 19
+    Top = 852
+    Width = 62
+    Caption = 'OpenFile'
+    Checked = True
+    State = cbChecked
+    TabOrder = 49
+  end
+  object MT2: TMemo
+    Left = 1176
+    Height = 800
+    Top = 8
+    Width = 288
+    Lines.Strings = (
+      ''
+    )
+    ScrollBars = ssBoth
+    TabOrder = 50
+  end
+  object GB_Syntax: TGroupBox
+    Left = 1035
+    Height = 112
+    Top = 0
+    Width = 129
+    Caption = 'Syntax'
+    ClientHeight = 94
+    ClientWidth = 125
+    TabOrder = 51
+    object CB_LeadToLower: TCheckBox
+      Left = 8
+      Height = 19
+      Top = 2
+      Width = 86
+      Caption = 'LeadToLower'
+      Checked = True
+      OnClick = CB_LeadToLowerClick
+      State = cbChecked
+      TabOrder = 0
+    end
+    object CB_ControlSpace: TCheckBox
+      Left = 8
+      Height = 19
+      Top = 20
+      Width = 84
+      Caption = 'ControlSpace'
+      OnClick = CB_ControlSpaceClick
+      TabOrder = 1
+    end
+    object CB_ExtCom: TCheckBox
+      Left = 8
+      Height = 19
+      Top = 38
+      Width = 115
+      Caption = 'Algoritmic Command'
+      Checked = True
+      OnClick = CB_ExtComClick
+      State = cbChecked
+      TabOrder = 2
+    end
+    object CB_LGC_Names: TCheckBox
+      Left = 8
+      Height = 19
+      Top = 56
+      Width = 115
+      Caption = 'Logic named oper''s.'
+      OnClick = CB_LGC_NamesClick
+      TabOrder = 3
+    end
+    object CB_LGC_SYMBS: TCheckBox
+      Left = 8
+      Height = 19
+      Top = 75
+      Width = 120
+      Caption = 'Logic symbolic oper''s'
+      OnClick = CB_LGC_SYMBSClick
+      TabOrder = 4
+    end
+  end
+  object CB_Package: TCheckBox
+    Left = 348
+    Height = 19
+    Top = 90
+    Width = 160
+    Caption = 'Enable  Replace With Ignore '
+    OnClick = CB_PackageClick
+    TabOrder = 52
+  end
+  object LExprLen: TLabel
+    Left = 1053
+    Height = 13
+    Top = 379
+    Width = 150
+    Caption = '                                                  '
+    ParentColor = False
+  end
+  object Label35: TLabel
+    Left = 944
+    Height = 13
+    Top = 379
+    Width = 90
+    Caption = 'Expression Length:'
+    ParentColor = False
+  end
+  object Label32: TLabel
+    Left = 208
+    Height = 13
+    Top = 854
+    Width = 73
+    Caption = 'Counts for Prog'
+    ParentColor = False
+  end
+  object E_CntProg: TEdit
+    Left = 293
+    Height = 21
+    Top = 850
+    Width = 54
+    TabOrder = 53
+    Text = '1'
+  end
+  object CB_ShowDiff: TCheckBox
+    Left = 940
+    Height = 19
+    Top = 509
+    Width = 20
+    Checked = True
+    OnClick = CB_ShowDiffClick
+    State = cbChecked
+    TabOrder = 54
+  end
+  object Label40: TLabel
+    Left = 684
+    Height = 13
+    Top = 423
+    Width = 85
+    Caption = 'Parameters(const)'
+    ParentColor = False
+  end
+  object EAre: TEdit
+    Left = 641
+    Height = 21
+    Top = 446
+    Width = 75
+    TabOrder = 55
+    Text = '2.54321'
+  end
+  object EBre: TEdit
+    Left = 641
+    Height = 21
+    Top = 471
+    Width = 75
+    TabOrder = 56
+    Text = '-3.98765'
+  end
+  object ECre: TEdit
+    Left = 641
+    Height = 21
+    Top = 495
+    Width = 75
+    TabOrder = 57
+    Text = '4.12345'
+  end
+  object EAim: TEdit
+    Left = 765
+    Height = 21
+    Top = 446
+    Width = 75
+    TabOrder = 58
+    Text = '4.12345'
+  end
+  object EBim: TEdit
+    Left = 765
+    Height = 21
+    Top = 472
+    Width = 75
+    TabOrder = 59
+    Text = '2.54321'
+  end
+  object ECim: TEdit
+    Left = 765
+    Height = 21
+    Top = 496
+    Width = 75
+    TabOrder = 60
+    Text = '-3.98765'
+  end
+  object Label50: TLabel
+    Left = 601
+    Height = 13
+    Top = 450
+    Width = 32
+    Caption = 'a, ai.re'
+    ParentColor = False
+  end
+  object Label51: TLabel
+    Left = 600
+    Height = 13
+    Top = 477
+    Width = 32
+    Caption = 'b, bi.re'
+    ParentColor = False
+  end
+  object Label52: TLabel
+    Left = 600
+    Height = 13
+    Top = 500
+    Width = 32
+    Caption = 'c, ci.re'
+    ParentColor = False
+  end
+  object Label53: TLabel
+    Left = 732
+    Height = 13
+    Top = 448
+    Width = 21
+    Caption = 'ai.im'
+    ParentColor = False
+  end
+  object Label54: TLabel
+    Left = 732
+    Height = 13
+    Top = 476
+    Width = 21
+    Caption = 'bi.im'
+    ParentColor = False
+  end
+  object Label55: TLabel
+    Left = 732
+    Height = 13
+    Top = 500
+    Width = 21
+    Caption = 'ci.im'
+    ParentColor = False
+  end
+  object CB_VirtAlloc: TCheckBox
+    Left = 1186
+    Height = 19
+    Top = 853
+    Width = 95
+    Caption = 'Use virtual alloc'
+    OnClick = CB_VirtAllocClick
+    TabOrder = 61
+  end
+  object CB_MaskFPU: TCheckBox
+    Left = 1288
+    Height = 19
+    Top = 852
+    Width = 169
+    Caption = 'Additional Mask FPU Exception'
+    OnClick = CB_MaskFPUClick
+    TabOrder = 62
+  end
+  object CB_NoCalc: TCheckBox
+    Left = 984
+    Height = 19
+    Top = 852
+    Width = 78
+    Caption = 'Just compile'
+    OnClick = CB_NoCalcClick
+    TabOrder = 63
+  end
+  object CB_SafeCalc: TCheckBox
+    Left = 1073
+    Height = 19
+    Top = 852
+    Width = 96
+    Caption = 'Safe calculation'
+    OnClick = CB_SafeCalcClick
+    TabOrder = 64
+  end
+  object CB_Destroy: TButton
+    Left = 1186
+    Height = 25
+    Top = 815
+    Width = 75
+    Caption = 'Destroy'
+    OnClick = CB_DestroyClick
+    TabOrder = 65
+  end
+  object CB_Create: TButton
+    Left = 1376
+    Height = 25
+    Top = 816
+    Width = 75
+    Caption = 'Create'
+    OnClick = CB_CreateClick
+    TabOrder = 66
+  end
+end
