@@ -1,0 +1,138 @@
+                            // Complex Dynamic  //
+
+{$DRAWING MODE: ComplexDynamic}
+
+
+PI2i:dbl=1/(pi*2);
+ix:int=0;iy:int=0;
+fz:CXdbl=0+0i;
+itr:int=0;
+
+False:ext=0;
+True:ext=1;
+
+Xmin: dbl=G_Xmin;
+Xmax: dbl=G_Xmax;
+Ymin: dbl=G_Ymin;
+Ymax: dbl=G_Xmax;
+
+z1:CXdbl=0+0i;
+
+is1:dbl=1/ImageSize;    
+
+
+ //set mask for all FPU exceptions:
+ 
+SetMaskFPU();  //for max speed, remove it and: ReadExceptionFPU,ResetMaskFPU
+
+
+for(itr = 0, Iterations,
+
+ for(ix = 0, ImageSize,
+
+
+    re :dbl = Xmin + ix * (Xmax - Xmin) *is1;
+
+    fx:dbl=2*(ix*is1-0.5); //_____ to x: -1..1
+
+   for(iy = 0, ImageSize,
+       
+
+        im :dbl = Ymin + iy * (Ymax - Ymin) * is1;      
+  
+        z:CXdbl=re+i*im; 
+
+
+       
+       //************* MAIN FUNCTIONS *************
+
+
+
+       fz=z^3+2*sin(0.1*itr);
+       //fz=1/(z^2+sin(0.1*itr));
+       //z1=z*(exp(i*0.01*itr)-0.01*itr);fz=(z1^2-0.5-0.5i);
+       //z1=z*exp(0.1*itr*i); fz=z1^5/((z+1)*(z+i)*(z-i)*(z-1));
+       //z1=z*exp(0.1*itr*i); fz=z^5/((z1+1)*(z1+i)*(z1-i)*(z1-1));
+       //z1=z*exp(0.1*itr*i); fz=z/((z1+1)*(z+i)*(z-i)*(z-1));
+       //fz=z/((z+1)*(z+i*sin(0.1*itr))*(z-i)*(z-sin(0.1*itr)));
+       //fz=1/(z*exp(-0.1*itr));
+       
+       //ifp(0.02*itr < 1, fz=z^2-0.02*itr; itr1:int=itr , fz= (z*exp(0.02*(itr-itr1)*i))^2-0.02*itr);
+
+       //fz=z/((z/exp(0.05*itr*i)-0.5)*(z*exp(0.05*itr*i)-0.5i));
+       //fz=(z*exp(i*0.1*itr))*(z*exp(-i*0.2*itr)-0.9i)*z^3-1-i; 
+       //z1=z*exp(i*0.05*itr); fz=z1^2-0.05*itr;
+       // k:int=0;  fz = 0+0i; for(k = 1, 10, z=z+0.2*sin(0.3*itr);fz=fz+z^k/(1-z^k)); 
+      
+       //************************************************
+ 
+  
+       //if exception - don't draw : 
+   
+       ifp(ReadExceptionFPU() <> False ,goto (nxt)); //for max speed, remove it and : SetMaskFPU,ResetMaskFPU
+
+        
+       //_________ convert the complex function value to a HSV color: 
+
+       t:dbl=atan2(fz.im,fz.re);
+       while(t < 0,t=t+2PI);
+       while(t >= 2PI,t=t-2PI);
+       //h:dbl=t/2PI;
+       h:dbl=t*PI2i;
+       m:dbl=sqrt(fz.re^2+fz.im^2);
+       r0:dbl=0; r1:dbl=1;
+       while(m > r1,r0=r1; r1=r1*Exp1);
+       r:dbl = (m - r0) / (r1 - r0);
+       ifp(r < 0.5, p=2*r, p=2*(1-r));
+       q:dbl = 1.0 - p;
+       p1:dbl = 1 - q ^3;
+       q1:dbl = 1 - p ^3;
+       s:dbl = 0.4 + 0.6 * p1;
+       v:dbl = 0.6 + 0.4 * q1;
+       
+       //_________ convert the HSV color  to  RBG color: 
+
+       ifp(s = 0, 
+
+                  r = v; g: dbl = v; b:dbl = v
+                , 
+
+                  ifp(h = 1, h = 0);
+                  zi:int = Trunc(6 * h); 
+                  f = h * 6 - zi;
+                  p = v * (1 - s);
+                  q = v * (1 - s * f);
+                  t = v * (1 - s * (1 - f)); 
+
+                  case(zi,
+                         =0,  r = v; g = t; b = p;,
+                         =1,  r = q; g = v; b = p;,
+                         =2,  r = p; g = v; b = t;,
+                         =3,  r = p; g = q; b = v;,
+                         =4,  r = t; g = p; b = v;,
+                         =5,  r = v; g = p; b = q;
+                          );
+    
+               
+           );  
+       
+       
+        fy:dbl=2*(iy*is1-0.5); //_______ to y: -1..1
+
+        glColor3d (r, g, b);
+        glBegin(0);
+             glVertex2d(fx,fy);
+        glEnd();
+
+        
+     nxt>>
+      );     //next iy
+
+   ) ;       //next ix
+ SwapBuffers();
+);           //next itr
+
+ResetMaskFPU(); //for max speed, remove it and : SetMaskFPU,ReadExceptionFPU
+
+
+

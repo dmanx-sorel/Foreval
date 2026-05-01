@@ -1,0 +1,38 @@
+                      //  Fractal   (Fern) //
+
+{$DRAWING MODE: Fractal}
+
+
+x:ext=1;
+y:ext=0;
+p:ext=0;
+t:ext=0;
+k:int=0;
+
+mid_x :int= ImageSize/2;
+mid_y :int= ImageSize-40;
+radius :int= 0.1 * mid_y;
+
+iterations:int=500000;
+
+BackGround(0,0,0);
+
+
+ for( k = 1, iterations, 
+
+     p=rnd();
+     t=x;
+     case(p,
+          <= 0.85, x = 0.84 * x - 0.045 * y; y = 0.045 * t + 0.86 * y + 1.6;,
+          <= 0.92, x = 0.25 * x - 0.26 * y;  y = 0.23 * t + 0.25 * y + 1.6; ,
+          <= 0.99, x = -0.135 * x + 0.28 * y;y = 0.26 * t + 0.245 * y + 0.44;,
+                   x=0; y=0.16*y;  
+         );    
+
+       SetpixelRGB(mid_x+radius*x, mid_y-radius*y+35,0,255,150);
+
+    );
+
+ShowImage();
+
+

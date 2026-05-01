@@ -1,0 +1,341 @@
+   
+                    //*** Finding the roots of an explicit  function ***
+
+//The main search for roots is by the bisection method.
+
+//Finds all roots except tangents where the function does not change sign.
+//To search for tangent roots, the Newton-Raphson method is used.
+//Newton-Raphson method Newton-Raphson uses 1 and 2 derivatives.
+//Derivatives are searched for by symbolic differentiation of the main function by X , and then compiled into a separate expression
+
+
+//Define  functions between this keys: DefFunc+, DefFuncDeriv+  & DefFuncDeriv-, DefFunc-
+//Each function is written only in one line without hyphenation.
+//Main global variables - x. Functions don't consist any passed variables!
+//A function using derivatives must not contain algorithmic commands: for,while,... and separator ';'
+
+{$DRAWING MODE: PlotGraph2D}
+
+{$DefFunc+}  //keys for define function
+ 
+  {$DefFuncDeriv+} //keys for 1,2,3 derivatives of FuncX with names: FuncXd1,FuncXd2,FuncXd3. Needs only for Newton-Raphson method
+
+   //******* Uses bisection method ********
+
+        //  Sign-variable roots  
+     
+     FuncX()=sin(exp(root3(x^2)))
+     //FuncX()=asin(cos(x));
+     //FuncX()=sin(exp(2*sqrt(sin(x))))
+     //FuncX()=ln(x*sin(x));
+    
+
+           //  With terminal roots
+     //FuncX()=sqrt(sin(x));
+     //FuncX()=exp(sqrt(sin(x)))-1;      
+     //FuncX()=exp(sqrt(tan(x)))-1;
+
+     //FuncX()=sin(x)^cos(x);
+     //FuncX()=sin(x/exp(sqrt(sin(x))))
+     //FuncX()=sin(cos(x)-exp(sqrt(sin(3*x))))    
+     //FuncX()=exp(sqrt(x*sin(x)))-1;
+
+
+ //******* Tangent roots. Uses Newton-Raphson method ********
+   
+    //FuncX()=asin(cos(x))+pi/2;    
+    //FuncX()=root3(sin(x-1)^2)-root3(sin(x+1)^2)+root3(sin(-2)^2);
+    //FuncX()=ln(sin(exp(2*sqrt(sin(x)))))
+    //FuncX()=ln(sin(2*sqrt(sin(x))))
+ 
+//********* Mixed roots, using both methods 
+
+    //FuncX()=(cos(x*8)+1)*sqrt(cos(x*2))
+    //FuncX()=(sin(x*3)+1)*(root3(sin(x-1)^2)-root3(sin(x+1)^2))
+
+
+//**** such roots are not found
+  //FuncX()=sqrt(ln(sin(x)))  //x=Pi/2 +- 2*Pi*k
+
+
+
+  {$DefFuncDeriv-}
+    
+
+{$DefFunc-}
+
+
+
+PtrF:Pointer=@FuncX;
+PtrFd1:Pointer=@FuncXd1;
+PtrFd2:Pointer=@FuncXd2;
+PtrFd3:Pointer=@FuncXd3;
+
+
+False:int=0;
+True:int=1;
+M_NR:Int = True; //enable use newton-raphson
+
+epsX:ext=1E-17; //1E-18 min!!
+epsF:ext=1E-7;
+a:ext=Xmin; 
+b:ext=Xmax;
+cutoff:int=300;//max iteration for root finding on segment [x1,x2]; with decrease -> rise speed, but decrease accuracy
+itr:int=0;
+
+RootFound:int=False;
+RootArrayTmp:arrayExt=0;
+RootArray:arrayExt=0;
+R1:ext=0;
+R2:ext=0;
+R0:ext=0;
+R3:ext=0;
+Hi:int=0;
+LR:int=0;
+hR:ext=0.001;  //scan step, with increase -> rise speed, but decrease accuracy
+distR:ext=hR;  //distance |root1-root2| > distR , else root1=root2 !!!
+xc:ext=a;
+Err1:int=0;
+Err2:int=0;
+Err0:int=0;
+Err3:int=0;
+k:int=0;
+
+
+
+while(xc<b,
+     itr=0; 
+     x1:ext=xc; x2:ext=xc+hR; x0:ext=0; 
+
+
+   
+     //***************** Bisection (begin) *****************
+
+     x=x1; R1=CallRMaskFpu(PtrF,@Err1);
+     x=x2; R2=CallRMaskFpu(PtrF,@Err2);   
+     ifp(Err1 > False,R1=0); ifp(Err2 > False,R2=0); 
+           
+     //take into account the area where the function is defined only at one end 
+     ifp((sign(R1) < > sign(R2)) or ((Err1=False) and (Err2>=True)) or ((Err2=False) and (Err1>=True)), 
+            
+               
+  
+             while(abs(x2-x1)>epsX,  
+                    
+                  nxtx0>> 
+                    x0=(x1+x2)/2; 
+
+                    x=x1; R1=CallRMaskFpu(PtrF,@Err1);
+                    x=x0; R0=CallRMaskFpu(PtrF,@Err0);
+                    x=x2; R2=CallRMaskFpu(PtrF,@Err2); 
+                    ifp((Err1 > False) and (Err2 > False),goto(nxtxc));
+                    
+                    inc(itr);
+                    ifp(itr > cutoff, goto(out));   
+                     
+                    ifp(abs(x2-x1)<epsX,goto(out));
+
+                    ifp(Err1 > False,ifp(Err0 > False,x1=x0; goto(nxtx0), x2=x0; goto(nxtx0)));
+                    ifp(Err2 > False,ifp(Err0 > False,x2=x0; goto(nxtx0), x1=x0; goto(nxtx0)));
+
+                    ifp(R2*R0 < 0,x1=x0,x2=x0);
+                    inc(itr);
+                    ifp(itr > cutoff, goto(out));   
+                  ); 
+
+        out>>
+      
+        ifp((abs(x2-x1)<=epsX) and ((Err0=False) or (Err1=False) or (Err2=False)),             
+               ifp(Err0=False,xr=x0,ifp(Err1=False,xr=x1,ifp(Err2=False,xr=x2)));
+               x=xr; R0=CallR(PtrF);
+               ifp(abs(R0)<=epsF, L=Len(RootArrayTmp)+1; SetLen(RootArrayTmp,L); RootArrayTmp[L-1]=xr)             
+           );
+ 
+
+        //********************Bisection (end)******************************************** 
+         , 
+
+          //if no error & sign(R1) = sign(R2)    
+
+
+            
+         ifp(M_NR = True, 
+         //********************** Newton Raphson    (Begin)  **************************
+
+
+           epsFNR:ext=1E-12;  // |Func(root)|<=epsFNR
+           cutoffFNR:int=30;
+           FncD1:ext=0;
+           FncD2:ext=0;
+           Fnc:ext=0;
+           UF:ext=0;
+           DCF:ext=0;
+           xf:ext=0;
+           ErrNR:int=False;
+
+           xf=x1; ErrNR=False;
+
+           try();
+
+             x=xf; Fnc=CallR(PtrF);
+             x=xf; FncD1=CallR(PtrFd1);
+             x=xf; FncD2=CallR(PtrFd2);
+     
+             UF=Fnc/FncD1;
+             DCF=1/(FncD1-FncD2*UF);
+             xf=xf-Fnc*DCF;   
+             x=xf; Fnc=CallR(PtrF);
+             xf=xf-Fnc*DCF;
+
+          ifp(Exception() > False , ErrNR=True; goto(outNR));
+
+
+          itr=0; ErrNR=False;
+          while( abs(Fnc) > epsFNR,
+
+                inc(itr);
+
+                try();
+
+                   x=xf; Fnc=CallR(PtrF);
+                   x=xf; FncD1=CallR(PtrFd1);
+                   x=xf; FncD2=CallR(PtrFd2);
+                   UF=Fnc/FncD1;
+                   DCF=1/(FncD1-FncD2*UF);
+                   xf=xf-Fnc*DCF;   
+                   x=xf; Fnc=CallR(PtrF);
+                   xf=xf-Fnc*DCF;
+
+               ifp(Exception() > False , ErrNR=True; goto(outNR));
+
+               ifp(itr > cutoffFNR,  goto(endpNR));
+
+            );
+
+
+
+        endpNR>>
+        ifp( (ErrNR=False) and (abs(Fnc) < epsFNR) and (x<=Xmax) and (x>=Xmin), 
+       
+             xf=x; kr:int=0; Hi=High(RootArrayTmp); 
+             for(kr = 0, Hi,
+                 ifp(abs(x-RootArrayTmp[kr]) < distR, R1=CallR(PtrF); x=RootArrayTmp[kr]; R2=CallR(PtrF); ifp(abs(R1) <= abs(R2), RootArrayTmp[kr]=xf; goto(outNR), goto(outNR)))
+                 );
+
+             L=Len(RootArrayTmp)+1;  SetLen(RootArrayTmp,L); RootArrayTmp[L-1]= xf;
+           );
+
+       outNR>>
+                   
+            //**********************Newton Raphson    (End)**************************************    
+            );  //M_NR = True
+         
+       );
+
+        
+    nxtxc>> 
+     xc=xc+hR;
+
+
+    );
+
+//***  culling false roots:
+
+epsDX:ext=hR/2; // < hR!
+Hi=High(RootArrayTmp);
+for(k = 0, Hi, 
+            
+
+      x0= RootArrayTmp[k];
+      ifp((x0 <= Xmin)or(x0>=Xmax),goto(nxtfk));       
+
+      x1=x0; x2=x0-epsDX; x3=x0+epsDX;
+      
+
+      x=x1; R1=CallRMaskFpu(PtrF,@Err1); 
+      x=x2; R2=CallRMaskFpu(PtrF,@Err2);
+      x=x3; R3=CallRMaskFpu(PtrF,@Err3);
+      
+      //IsNAN - just in case, but not necessary
+     ifp((Err1 = False) and (IsNAN(R1) = 0), ifp(abs(R1)<epsF, LR=Len(RootArray)+1; SetLen(RootArray,LR); RootArray[LR-1]=x1),
+          ifp((Err2 = False) and (IsNAN(R2) = 0), ifp(abs(R2)<epsF, LR=Len(RootArray)+1; SetLen(RootArray,LR); RootArray[LR-1]=x2),
+              ifp((Err3 = False) and (IsNAN(R3) = 0), ifp(abs(R3)<epsF, LR=Len(RootArray)+1; SetLen(RootArray,LR); RootArray[LR-1]=x3))
+             )
+        );
+    
+    nxtfk>>            
+    );
+
+
+Hi=High(RootArray);
+RootArrayTmp=RootArray; 
+SetLen(RootArray,0);
+
+k1:int=0;
+k2:int=0;
+for(k = 0, Hi, 
+     
+    xr=RootArrayTmp[k];
+    
+    //compare xr with all 
+    for(k1 = k+1, Hi,
+      
+         xc=RootArrayTmp[k1];
+  
+         //if find similar 
+         ifp( abs(xr-xc) < distR, 
+              x=xr; Rr=CallR(PtrF); x=xc; Rc=CallR(PtrF);
+              //if it best  
+              ifp(abs(Rc)<abs(Rr),xr=xc);
+            );
+                
+       );
+
+     //compare with finded 
+     BCmpR:int=False;                 
+     Hi1:int=High(RootArray); 
+     for(k2 = 0, Hi1, ifp(abs(xr-RootArray[k2]) < distR, BCmpR=True; goto(outcmp)));
+     //if not, then to write
+     outcmp>>
+     ifp(BCmpR = False, LR=Len(RootArray)+1; SetLen(RootArray,LR);RootArray[LR-1]=xr)  
+        
+
+    );
+
+
+L=Len(RootArray); Hi=L-1;
+FuncRootArray: ArrayExt=L;
+for(k = 0, Hi, x=RootArray[k]; FuncRootArray[k]=CallR(PtrF));
+
+
+//**** Draw Function:
+SetCanvasColor(250,240,255);
+SetPenWidth(1);
+SetPenStyle(1);
+SetPenColor(0,0,255);
+DrawGraph2D(PtrF,@x,False);
+
+//**** Draw first derivative of Function:
+//SetPenColor(100,100,155);
+//DrawGraph2D(PtrFd1,@x,False);
+
+
+//**** Draw roots of Function:
+SetPointColor(50,155,50);
+SetPointSize(4);
+Hi=High(RootArray);
+for(k = 0, Hi, SetPoint(RootArray[k],0,False));
+
+
+ShowImage();
+
+ClearPrint();
+PrintAstrsk();
+Print(Len(RootArray));
+PrintAstrsk();
+//Print(RootArray);
+Print(RootArray,FuncRootArray);
+PrintAstrsk();
+
+{$EndProgramm}
+

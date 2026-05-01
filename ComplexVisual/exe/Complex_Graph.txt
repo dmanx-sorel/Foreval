@@ -1,0 +1,122 @@
+           //  Complex Graph   //
+
+
+{$DRAWING MODE: ComplexGraph}
+
+
+
+ix:int=0; iy:int=0;
+fz:CXext=0+0i;
+False:ext=0;
+True:ext=1;
+np:int=2;
+
+     
+
+
+
+SetMaskFPU(); //set mask for all FPU exceptions 
+
+
+for(ix = 0, ImageSize,
+
+   re :ext = Xmin + ix * (Xmax - Xmin) / ImageSize;
+
+   for(iy = 0, ImageSize,
+       
+       im :ext = Ymin + iy * (Ymax - Ymin) / ImageSize;
+
+       //little shift for bypass the critical points: 1/z and etc. :
+  
+       z:CXext=re+i*im; 
+       
+
+
+
+     //*********************** MAIN FUNCTIONS ************************ 
+       
+        fz=(z^2-1)*(z-2-i)^2/(z^2+2+2i);
+        //fz=z^5-i;
+        //k:int=0;  fz = 0+0i; for(k = 1, 10, fz=fz+z^k/(1-z^k)); 
+        //fz=cos(z)/sin(z^4-1); fz=cos(fz)/sin(fz^2-1);
+        //fz=1/sin(z^2.5); fz=ln(fz^2.5);
+        //fz=log(cos(z),cosh(z));
+        //fz=log(cos(z),ln(z));
+        //fz=log(cos(z),1/z^2);
+        //fz=poly(-1,-1,-1,-1,1/cos(1/z));
+        //fz=z^3.5;   fz=fz.re^2+i*fz.im^2;
+        //  k:int=0;  fz = 0+0i; for(k = 1, 10, fz=fz+z*i^k/(z-i^k)^k); 
+        // fz=re(exp(sin(z.re^2)-i)*z^np)+i*Re(exp(sin(z.im^2)+i)*(z-1)^np);
+
+      
+       //*************************************************************  
+         
+
+       //if exception - don't draw : 
+   
+       ifp(ReadExceptionFPU() <> False , goto (nxt));
+
+       
+       // convert the complex function value to a HSV color: 
+       t:ext=atan2(fz.im,fz.re);
+       while(t < 0,t=t+2PI);
+       while(t >= 2PI,t=t-2PI);
+       h:ext=t/2PI;
+       m:ext=sqrt(fz.re^2+fz.im^2);
+       r0:ext=0; r1:ext=1;
+       while(m > r1,r0=r1; r1=r1*Exp1);
+       r:ext = (m - r0) / (r1 - r0);
+       ifp(r < 0.5, p=2*r, p=2*(1-r));
+       q:ext = 1.0 - p;
+       p1:ext = 1 - q ^3;
+       q1:ext = 1 - p ^3;
+       s:ext = 0.4 + 0.6 * p1;
+       v:ext = 0.6 + 0.4 * q1;
+       
+       // convert the HSV color  to  RBG color: 
+       ifp(s = 0, 
+
+                  r = v; g: ext = v; b:ext = v
+                , 
+
+                  ifp(h = 1, h = 0);
+                  zi:int = Trunc(6 * h); 
+                  f = h * 6 - zi;
+                  p = v * (1 - s);
+                  q = v * (1 - s * f);
+                  t = v * (1 - s * (1 - f)); 
+
+                  case(zi,
+                         =0,  r = v; g = t; b = p;,
+                         =1,  r = q; g = v; b = p;,
+                         =2,  r = p; g = v; b = t;,
+                         =3,  r = p; g = q; b = v;,
+                         =4,  r = t; g = p; b = v;,
+                         =5,  r = v; g = p; b = q;
+                          );
+   
+               
+           );  
+       
+       
+        clRed :int= 255.0 * r;
+        clGreen :int= 255.0 * g;
+        clBlue :int= 255.0 * b;
+        
+       
+        SetPixelRGB(ix,iy, clRed, clGreen, clBlue); 
+
+       //SetPixelRGB( ix, ImageSize-iy, clRed, clGreen, clBlue);  
+       //SetPixelRGB( ImageSize-ix, ImageSize-iy, clRed, clGreen, clBlue); 
+       
+      nxt>>
+      );  //next iy
+
+   ) ;    //next ix
+
+ResetMaskFPU();
+
+ShowImage();
+
+
+

@@ -1,0 +1,36 @@
+                  Для запуска ComplexVisual.exe:
+
+  Скопируйте Foreval.dll из папки .../Test/Delphi/ в папку  .../ComplexVisual/exe
+
+Для каждого файла - свой режим отображения(drawing mode):
+  Fractal:          Fractal_Fern.txt, Fractal_Julia.txt
+  Complex graph:    Complex_graph.txt 
+  Complex dinamic:  Complex_dinamic.txt
+  Graph F(x):       PlotFunc2D.txt, PlotFunc2D_Roots.txt
+  Fourier series:   PlotFourierSeries.txt
+
+ При открытие файлов режимы включаются автоматически.
+
+ Draw Delphi - отрисовка  в Delphi. Формула  компилируется через Foreval.
+ Алгоритм - аналолгичный соответствующему открытому файлу 
+ Поиск корней через Draw Delphi отсутствует.
+
+
+ В режимах "Fractal", "Complex graph",  "Graph F(x)" , "Fourier series" поддерживается выделение области на изображении мышью.
+ После выделения снова нажать <Run program> для детализации.
+ В режиме "Fourier series" можно зафиксировать интервал разложения [Xmin,Xmax] - галочка "Fix Fourier definition interval" и
+  при дальнейшем изменении/масштабировании [Xmin, Xmax], интервал разложения не будет меняться.  
+  Используется для детализации отрисовки разложения при увеличении масштаба.  
+
+
+ComplexVisual.exe работает с обоими версиями Foreval.dll, скомпилированными в Delphi и Lazarus
+
+
+          Для компиляции ComplexVisual.exe:
+ 
+  Скопировать  модуль подключения  Forevaldll.pas из папки .../Test/CommonDelphiLazarus в папку .../ComplexVisual/Sources   
+  Компилировать ComplexVisual.dpr
+
+
+ComplexVisual.exe скомпилирован в Delphi2009
+

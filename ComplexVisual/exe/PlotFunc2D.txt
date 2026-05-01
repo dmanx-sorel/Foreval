@@ -1,0 +1,339 @@
+
+
+                 //*****  Plot Functions F(x)   *****//
+
+                
+
+//Define drawing functions between this keys: DefFunc+, DefFunc-
+//Each function is written only in one line without hyphenation
+//Main variables - x. Functions don't consist any passed variables!
+//Valid auxiliary global variables in these functions: real: y,t,a,b,c; complex: z1,z2,z3 ;
+//Functions must  return real result
+//Main function for drawing  is set by their address to 'FuncPtr' 
+
+{$DRAWING MODE: PlotGraph2D}
+
+{$DefFunc+}
+
+
+   Func1X()=x*sin(x);
+   Func2X()=tan(x);
+   Func3X()=x/(sin(x)-cos(x))^3;
+   Func4X()=asin(cos(x));
+   Func5X()=root3(sqr(x+1))-root3(sqr(x-1));
+   Func6X()=root3(sin(x-1)^2)-root3(sin(x+1)^2);
+   Func7X()=root3(sin(x-1))+root3(sin(x+1));
+   Func8X()=cos(x)^sin(x);
+   Func9X()=x/sin(x);
+   Func10X()=sqrt(sin(x));
+   Func11X()=sin(x/exp(sqrt(sin(x))));
+   Func12X()=ln(x*sin(x));
+   Func13X()=sin(cos(x)-exp(sqrt(sin(3*x))));
+   Func14X()=(cos(x*8)+1)*sqrt(cos(x*2));
+
+
+{$DefFunc-}
+
+
+FuncPtr:Ptr=@Func3X;   //Set addr of drawing function
+
+//* Error catching methods:
+CatchErrorFPU1:int=1;   //* Mask only FPU exception; In block "try()-exception()". Works slowly, but with many exceptions, faster than CatchErrorALL.
+CatchErrorFPU2:int=2;   //* Mask only FPU exception. Reading only FPU flags of exceptions in "ReadExceptionFPU()". Works more faster than CatchErrorFPU1.
+CatchErrorFPU3:int=3;   //* Mask  FPU exception , reading  FPU flags of exceptions and reset mask FPU in one proc: CallRMaskFPU.  
+CatchErrorALL:int=4;    //* Catch all errors in delphi block "try except end". The fewer exceptions during the calculation of the function, the faster it works. 
+
+TypeCatchError:int=CatchErrorFPU2;   //* Set error catching method
+//TypeCatchError:int=CatchErrorFPU1; //* Set error catching method
+//TypeCatchError:int=CatchErrorFPU3; //* Set error catching method
+//TypeCatchError:int=CatchErrorALL;  //* Set error catching method
+
+
+
+SetPenWidth(1);
+SetPenStyle(1);
+SetPenColor(0,0,255);
+SetCanvasColor(250,240,255);
+
+
+
+XGF_min:ext=Xmin;
+XGF_max:ext=Xmax;
+
+YGF_min:ext=Ymin;
+YGF_max:ext=Ymax;
+
+
+hx:ext=(XGF_max-XGF_min)/ImageSize;
+hy:ext=(YGF_max-YGF_min)/ImageSize;
+
+
+XWmax:int=ImageSize;
+YWmax:int=ImageSize;
+
+//density of the number of points on a unit interval for more accurate display near critical values 
+KG:int=KDens;   
+
+
+Kx:ext=abs(XGF_max-XGF_min)/XWmax;
+Ky:ext=abs(YGF_max-YGF_min)/YWmax;
+Hkg:ext=1/KG;
+Hky:ext=1/Ky;
+Hkx:ext=1/Kx;
+
+//xf:ext=0; //global
+yf:ext=0;
+yf0:ext=0;
+yf1NEu:ext=0;
+yf2NEu:ext=0;
+
+
+Yfmax0:ext=0;
+Yfmin0:ext=0;
+Yfmax:ext=0;
+Yfmin:ext=0;
+YWminC:int=0;
+YWmaxC:int=0;
+ResultR:ext=0;
+FErr:ext=0;
+YfUP:ext=0;
+dyfUP:ext=0;
+
+False:int=0; 
+True:int=1;
+MaxInt:int=2147483647;
+_Rise:int=2;
+_Fall:int=1;
+
+gradY_u:int=_Rise;
+
+BFirst:int=True;
+BErr0:int=False;
+BErrC:int=False;
+BErrC0:int=False;
+BErr:int=False;
+BWout0:int=False;
+BWout:int=False;
+Bdyf:int=False;
+Bchgdyf:int=False; 
+Bdyft:int=False;
+BFirstNE :int= False;
+BFirstUP:int=False;
+BNoErrU:int = False;
+BdyfUP:int=False; 
+
+ifp(TypeCatchError = CatchErrorFPU2, SetMaskFPU() );
+
+
+xw:int=0; k:int=0; yw:int=0;
+
+for(xw = 0, XWmax,
+    
+   
+    Bchgdyf=False;   
+    BWout0=False;
+    BErr=False;
+    BFirstUP=False;
+    BWout=False;
+    BNoErrU=False; 
+    BFirstNE=False; 
+
+ 
+
+   for(k = 0, KG, 
+
+          x = XGF_min + Kx*(xw+k*Hkg);
+
+          BErrC=False;
+
+          case(TypeCatchError,
+               = CatchErrorFPU1,  try(); ResultR=CallR(FuncPtr); FErr=Exception(); ,   //* returns 0 if no error and 1, if error
+               = CatchErrorFPU2,  ResultR=CallR(FuncPtr); FErr=ReadExceptionFPU(); ,   //* returns 0 if no error and 1, if error   
+               = CatchErrorFPU3,  ResultR=CallRMaskFPU(FuncPtr,@FErr)              ,   //* returns some numeric codes <> 0, if error
+                                  ResultR=CallRSafe(FuncPtr,@FErr);                    //*  = CatchErrorALL, returns some numeric codes <> 0, if error
+              );
+ 
+
+
+          //need <> False necessary due to different results of ResultSafeR & ExceptionFPU
+         ifp(FErr <> False,  BErr=True; BErrC=True,  BNoErrU=True);     
+         ifp(IsNaN(ResultR)=True, BErr=True; BErrC=True; goto(nxtK)); //Just in case, but not necessary
+       
+         yf=ResultR;
+         
+         ifp(  ( ((k = 0) and (BErr = False)) or  ((BErr = True) and (BErrC = False))) and (BFirstUP=False) ,               
+                   Yfmax=yf;
+                   Yfmin=yf;
+                   YfUP=yf;
+                   Bchgdyf=False; 
+                   BFirstUP=True;
+                   yf1NEu=yf;  
+                   BFirstNE = True;
+                   goto (nxtK);                
+                   ,
+                  ifp(BErrC = True, goto(nxtK));
+             );
+
+
+         ifp( yf > Yfmax , Yfmax=yf; xf2=x);
+         ifp( yf < Yfmin , Yfmin=yf; xf1=x);
+
+      
+         ifp( (BErr = True) and (BErrC = False) and (BFirstNE = False) , yf1NEu=yf; BFirstNE = True );
+
+     
+         ifp( BErrC = False ,   yf2NEu=yf);
+
+     
+         dyfUP=yf-yfUP;  yfUP=yf;
+         ifp( dyfUP > 0 , BdyfUP=True   ,  BdyfUP=False);
+         ifp( dyfUP > 0 , gradY_u=_Rise ,  gradY_u=_Fall);
+
+
+
+            ifp( (Bchgdyf = False) and ((Yfmax > YGF_max) or (Yfmin < YGF_min))  ,         
+                ifp( Bdyf <> BdyfUP ,  Bchgdyf=True);
+                  
+               ,
+                Bdyf=BdyfUP;
+              );
+
+
+      nxtK>>
+      );  //end k
+   
+       
+
+   ifp( (BErr = False) and (BErrC = False) ,
+        ifp( abs(Yfmax) > abs(Yfmin),  yf=Yfmax , yf=Yfmin);
+        ,      
+        ifp(  (BErrC = False)  , yf=yf1NEu,   yf=yf2NEu);  
+      );
+    
+
+     ywf:ext=((yf-YGF_min)*Hky);
+
+     ifp( abs(ywf) > MaxInt, 
+          ifp(ywf > 0 , yw=MaxInt,  yw=-MaxInt);
+          , 
+          yw=Trunc(ywf) ;
+         );
+
+     
+     YWminCf:ext=((Yfmin-YGF_min)*Hky);
+     YWmaxCf:ext=((Yfmax-YGF_min)*Hky);
+      
+     ifp( abs(YWminCf) > MaxInt,   
+        ifp( YWminCf > 0 , YWminC=MaxInt , YWminC=-MaxInt);
+        ,
+         YWminC=Trunc(YWminCf);
+        ); 
+
+     ifp( abs(YWmaxCf) > MaxInt,     
+        ifp( YWmaxCf > 0 ,  YWmaxC=MaxInt , YWmaxC=-MaxInt);
+        ,
+        YWmaxC=Trunc(YWmaxCf);
+       );
+
+
+     ifp( (YWmaxC > YWmax) or (YWminC < 0) , BWout=True);
+
+
+     ifp(  ((YWmaxC > YWmax) and (YWminC < 0)) and (BErrC = False),
+     
+               ifp( Bdyf = True,  
+             
+                  ifp( BFirst = True, 
+                  
+                       MoveTo(xw+1,YWmax);
+                       BFirst = False;
+                     ,
+                  
+                       LineTo(xw,0);
+                       MoveTo(xw+1,YWmax);
+                     );             
+                ,
+              
+                 ifp( BFirst = True,
+                
+                      MoveTo(xw+1,0);
+                      BFirst = False;
+                 , 
+                      LineTo(xw,YWmax);
+                      MoveTo(xw+1,0);
+                   );
+
+               ); 
+       ,
+
+           ifp( (BErrC = False) or (BNoErrU = True) , 
+               ifp( BFirst = True,     
+                    ifp( BWout = True,                  
+                         
+                          ifp( gradY_u = _Rise, MoveTo(xw+1,YWmax) , MoveTo(xw+1,0));                                         
+                                          
+                        ,   
+                                     
+                          MoveTo(xw,YWmax-yw);
+                       );
+                    BFirst = False;
+                                       
+                   ,  
+                                       
+                     ifp( BErrC0 =  True,
+                          
+                           ifp( BWout = True,  
+                                                    
+                                  ifp( gradY_u = _Rise , MoveTo(xw+1,YWmax) , MoveTo(xw+1,0));
+                                                                        
+                               ,    
+                                   MoveTo(xw,YWmax-yw)
+                                ); 
+                        ,    
+                            LineTo(xw,YWmax-yw);
+                        ); 
+                     
+                   );               
+                
+              );
+
+       );
+
+
+     yf0=yf; yw0=yw; xw0=xw;
+     nxtxw>> 
+      BWout0=BWout;
+      BErrC0=BErrC;
+      BErr0=BErr;
+
+   );//end for xw
+
+ifp(TypeCatchError = CatchErrorFPU2, ResetMaskFPU() );
+
+yw=Trunc((0-YGF_min)*Hky);
+SetPenWidth(1);
+SetPenStyle(1);
+SetPenColor(255,0,0);
+MoveTo(0,YWmax-yw);
+LineTo(XWmax,YWmax-yw);
+
+
+xw=Trunc((0-XGF_min)*Hkx);
+SetPenWidth(1);
+SetPenStyle(1);
+SetPenColor(255,0,0);
+MoveTo(xw,0);
+LineTo(xw,YWmax);
+
+SetPenColor(192,192,192);
+
+
+ShowImage();
+
+
+
+
+
+
+
+

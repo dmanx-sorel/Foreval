@@ -1,0 +1,83 @@
+                  //  Fractal   (Julia) //
+
+{$DRAWING MODE: Fractal}
+
+n:int=ImageSize; 
+hx:ext=(Xmax-Xmin)/n;
+hy:ext=(Ymax-Ymin)/n; 
+y:ext=Ymin;  ix:int=0;  iy:int=0;  
+z:CXext=0+0i; 
+Rad:ext=4;  //conditionally, may be different
+
+ for( iy = 0, n, 
+
+     x:ext = Xmin;
+
+     for( ix = 0, n,
+
+         r:ext=1;   k:int=Iterations;   z=x+i*y;
+
+         while( (k > 0) and (r < Rad) ,
+                
+                 //**********  main fractal functions:  ********************
+
+
+                //   --  Mandelbrot  --
+                //z=z^2+x+i*y;
+
+
+
+
+                //   -- Julia  -- 
+                z=z^2-0.55-0.5i ;  
+                //z=z^2+0.285+0.01i;
+                //z=z^2+0.28+0.008i;
+
+
+             
+
+              //   -- other --
+              //z=$z^6-0.69-0.1i;
+              //z=$z^7-0.3121-0.943i;
+              //z=$z^7-0.2101-0.9083i;
+              //z=z^7-(0.76+0.69i)*z;
+              //z=z^7-(0.76+0.67i)*z;
+              //z=z^7-(0.101+0.439i)/z;
+
+              //z=(1+i)*sin(z)-0.719i;
+              //z=(1+i)*sin(z)-0.719i+0.0297;
+              //z=cos(z)/sin(z^4-1);
+              //z=(z^2-i)/(2*z^2+i)-0.59;
+              //z=(z^2-i)/(2*z^2+i)-0.66;
+              //z=(z^2-i)/(2*z^2+i)-0.67;
+              //z=z^2-z.re-i*z.im+0.11i;
+              //z=z^4-z.re-i*z.im-0.6i;
+              //z=z^4-z.re-0.9*i*z.im-0.77i;
+              //z=z^8-0.65+0.368i ;  
+              //z=z^2/(z*i+0.35i+0.1) ; 
+              //z=(z^3-z^2+z)/(z^2-z-0.51i-0.84);
+              //z=exp(z^2)-0.77; 
+              //z=exp(z^2)-0.57i;  
+              //z=exp(z^2)-0.37-0.39i; 
+              //z=exp(z^2)-0.35-0.39i; 
+              //z=exp(z^4)-0.35-0.53i; 
+             
+
+             //**************************************************************
+
+                r=z.re^2+z.im^2; 
+                dec(k)
+
+                 );
+
+         cl:int=k*255/Iterations;  
+        clRed:int=10*cl; clGreen:int=5*cl; clBlue:int=cl; 
+       //clRed:int=97*cl; clGreen:int=50*cl; clBlue:int=10*cl; 
+        SetPixelRGB(ix,iy, clRed, clGreen, clBlue); 
+         x=x+hx;
+        ); 
+     y=y+hy;
+    );
+ShowImage();
+
+
