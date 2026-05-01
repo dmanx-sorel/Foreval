@@ -65,4 +65,4 @@ MIT License.
 To run the  test program, copy Foreval.dll from the folder .../Test/Delphi and place it into the folder with the test program.
 
 .../doc     - full documentation in ".doc" files.
-.../Foreval - sources of Foreval (for Delphi and Lazarus) 
+.../Foreval - sources of Foreval (for Delphi and Lazarus) .
