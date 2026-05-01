@@ -1,6 +1,8 @@
 # About Foreval library
 
-Foreval is compiler of mathematical expressions (compiled directly to x86-32 CPU/FPU/SSE  instructions), given as string at run-time. 
+Foreval is compiler of mathematical expressions, given as string at run-time. 
+After parsing and building tree of expression is perform  optimizations and compiling directly to x86-32 CPU/FPU/SSE  instructions. 
+The address of the compiled expression is returned, which can be passed into program and call inside it or evaluate an expression by calling Foreval external functions.
 Present as "dll" library and Delphi sources. Can be compiled in FPC (Lazarus). Can be direct connection to the program (without dll).
 Examples for Delphi, Lazarus , GCC (Codeblock).
 Foreval.dll is 32 bit compiler. Can be connected only for 32 bit program.
