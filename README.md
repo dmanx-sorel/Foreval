@@ -44,7 +44,7 @@ Compiled "Foreval.dll" and  demo programs work in Windows OS 32/64.   Current ve
 >-  algorithmic commands: if, goto, gosub/return, call, for, while, case,...and other.
 >-  procedures for masking and intercepting FPU exceptions: setmaskfpu, try, except,...and other.
 
-* Adding internal and external real variables and arrays of (extended, double, single, integer32), parameters of (extended, double) and pointers.
+* Adding internal and external real variables and arrays of (extended, double, single, integer32), parameters of (extended, double) and pointers. All arrays are dynamic.
 * Support complex numbers: variables of (extended, double, single) and complex parameters of (extended, double).
 * Adding external functions with unlimited and indefinite number of variables with any types of (real, integer32, complex, array, pointer).
 * Adding external functions in one line with any types and numbers of arguments (real, integer32, complex,array, pointer) .
