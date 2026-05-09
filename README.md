@@ -38,7 +38,8 @@ Compiled "Foreval.dll" and  demo programs work in Windows OS 32/64.   Current ve
 
 >-  logical functions: and, or, not, xor, nand, nor, xnor
 >-  trigonometric, hyperbolic, ... and other functions.
->-  special functions: gamma, bessel, legendre, ...and other. 
+>-  special functions: gamma, bessel, legendre, ...and other.
+>-  statistical functions, functions of generate of pseudorandom numbers.
 >-  functions with arrays: max, min, sum, ...and other.
 >-  algorithmic commands: if, goto, gosub/return, call, for, while, case,...and other.
 >-  procedures for masking and intercepting FPU exceptions: setmaskfpu, try, except,...and other.
@@ -57,7 +58,7 @@ Compiled "Foreval.dll" and  demo programs work in Windows OS 32/64.   Current ve
 * Foreval.dll  (in .../Test/Delphi) - Foreval library.
 * TestG9_dll.exe (in .../Test/Delphi) - main testing program of Foreval.dll with all optpimizations
 * ForevalG9_GCC_O3_EXT.exe (in .../Test/GCC) - testing program compiled in GCC. Consist manies examples of using, commentaries and comparative performance test with GCC        
-* ComplexVisual.exe (in .../ComplexVisual/exe) - 
+* ComplexVisual.exe (in .../ComplexVisual/exe) - executes the given program text in the syntax of Foreval library. Text examples of programs:
 >- program visualizing of functions of complex variable F(z) - complex domain coloring, 
 >- building simple fractals of F(z) 
 >- graph plotting of real function  F(x)
