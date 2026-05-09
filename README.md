@@ -27,9 +27,9 @@ Compiled "Foreval.dll" and  demo programs work in Windows OS 32/64.   Current ve
 >-   '| |'       - abs bracket
 >-   '[,]'       - trunc bracket
 >-   '{,}'       - frac bracket 
->-   '$'         - conjugation of expr;  $(Expr)=Conj(Expr)
->-   '.re'       - real part;            (Expr).re=Re(Expr)
->-   '.im'       - imaginary part;       (Expr).im=Im(Expr)  
+>-   '$'         - conjugation of complex variable;  $z=Conj(z)
+>-   '.re'       - real part of complex variable;      z.re=Re(z)
+>-   '.im'       - imaginary part of complex variable; z.im=Im(z)  
 >-   '$h'        - hexadecimal number suffix. ( A12FF$h )
 >-   '$b'        - binary number suffix. ( 11001011101$b )
 >-   '...'       - logical operators (connected separately see .doc).
@@ -40,19 +40,21 @@ Compiled "Foreval.dll" and  demo programs work in Windows OS 32/64.   Current ve
 >-  trigonometric, hyperbolic, ... and other functions.
 >-  special functions: gamma, bessel, legendre, ...and other. 
 >-  functions with arrays: max, min, sum, ...and other.
->-  algorithmic commands: if, goto, gosub/return, call, for, while, case,...and other. 
+>-  algorithmic commands: if, goto, gosub/return, call, for, while, case,...and other.
+>-  procedures for masking and intercepting FPU exceptions: setmaskfpu, try, except,...and other.
 
 * Adding internal and external real variables and arrays of (extended, double, single, integer32), parameters of (extended, double) and pointers.
 * Support complex numbers: variables of (extended, double, single) and complex parameters of (extended, double).
 * Adding external functions with unlimited and indefinite number of variables with any types of (real, integer32, complex, array, pointer).
 * Adding external functions in one line with any types and numbers of arguments (real, integer32, complex,array, pointer) .
-* Adding an external function (with one argument) given by arrays of data using cubic spline interpolation.
+* Adding an external functions (with one argument) given by arrays of data using cubic spline interpolation.
 * Symbolic and numeric differentiation (also for the added functions).
-* Optimization of a code.
+* Multi-level  optimization of code.
 * Supported string types: UTF16, WideString, AnsiString, UTF8
 
 
-### Compiled "exe"  programs: 
+### Compiled   files: 
+* Foreval.dll  (in .../Test/Delphi) - Foreval library.
 * TestG9_dll.exe (in .../Test/Delphi) - main testing program of Foreval.dll with all optpimizations
 * ForevalG9_GCC_O3_EXT.exe (in .../Test/GCC) - testing program compiled in GCC. Consist manies examples of using, commentaries and comparative performance test with GCC        
 * ComplexVisual.exe (in .../ComplexVisual/exe) - 
